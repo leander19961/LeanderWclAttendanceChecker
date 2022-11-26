@@ -12,7 +12,7 @@ namespace LeanderWclAttendanceChecker.API.Web
     {
         public static List<string> GetReportsFromJson(string jsonText)
         {
-            List<string> result = null;
+            List<string> result = new List<string>();
 
             JsonDocument json = JsonDocument.Parse(jsonText);
             JsonArray root = JsonArray.Create(json.RootElement);
@@ -35,28 +35,31 @@ namespace LeanderWclAttendanceChecker.API.Web
 
         public static List<string> GetCharactersFromJson(string jsonText)
         {
-            List<string> result = null;
+            List<string> result = new List<string>();
 
             JsonDocument json = JsonDocument.Parse(jsonText);
             JsonObject root = JsonObject.Create(json.RootElement);
 
-            JsonObject friendlies = null;
+            JsonArray friendlies = null;
             foreach (KeyValuePair<string, JsonNode> key in root)
             {
                 if (key.Key.Equals("friendlies"))
                 {
-                    friendlies = key.Value.AsObject();
+                    friendlies = key.Value.AsArray();
                     break;
                 }
             }
 
-            foreach (KeyValuePair<string, JsonNode> key in friendlies)
+            foreach (JsonObject friedly in friendlies)
             {
-                string _tmp = null;
-                if (key.Key.Equals("name"))
+                foreach (KeyValuePair<string, JsonNode> key in friedly)
                 {
-                    if (key.Value.AsValue().TryGetValue(out _tmp))
-                        result.Add(_tmp);
+                    string _tmp = null;
+                    if (key.Key.Equals("name"))
+                    {
+                        if (key.Value.AsValue().TryGetValue(out _tmp))
+                            result.Add(_tmp);
+                    }
                 }
             }
 

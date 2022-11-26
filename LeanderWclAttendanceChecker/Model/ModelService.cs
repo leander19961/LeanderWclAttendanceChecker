@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 using LeanderWclAttendanceChecker.API.Web;
+using LeanderWclAttendanceChecker.IO;
 using LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer;
 
 namespace LeanderWclAttendanceChecker.Model
@@ -16,6 +17,8 @@ namespace LeanderWclAttendanceChecker.Model
 
         private WebAPI _webAPI;
 
+        private bool _useStartTime;
+        private bool _useEndTime;
         private int _maxAttendance;
 
         private List<Player> _players;
@@ -39,7 +42,19 @@ namespace LeanderWclAttendanceChecker.Model
             set { _baseUrl = value; }
         }
 
-        ModelService(LeanderWclAttendanceCheckerView mainWindow, string baseUrl)
+        public bool UseStartTime
+        {
+            get { return _useStartTime; }
+            set { _useStartTime = value; }
+        }
+
+        public bool UseEndTime
+        {
+            get { return _useEndTime; }
+            set { _useEndTime = value; }
+        }
+
+        public ModelService(LeanderWclAttendanceCheckerView mainWindow, string baseUrl)
         {
             _mainWindow = mainWindow;
             _baseUrl = baseUrl;
@@ -49,6 +64,31 @@ namespace LeanderWclAttendanceChecker.Model
 
             _players = new List<Player>();
             _characters = new List<Character>();
+        }
+
+        public Character CreateNewCharacter(string name)
+        {
+            Character newCharacter = new Character(name);
+            _characters.Add(newCharacter);
+            return newCharacter;
+        }
+
+        public Player CreateNewPlayer(string name)
+        {
+            Player newPlayer = new Player(name);
+            _players.Add(newPlayer);
+
+            IOManager.SavePlayers(_players);
+
+            return newPlayer;
+        }
+
+        public void DeletePlayer(Player? player)
+        {
+            player.RemoveYou();
+            _players.Remove(player);
+
+            IOManager.SavePlayers(_players);
         }
 
         public ObservableCollection<Player> GetPlayersObservable()
@@ -75,28 +115,40 @@ namespace LeanderWclAttendanceChecker.Model
             return result;
         }
 
-        public void GetCharacterAttendance(string startTime, string endTime)
+        public void GetCharacterAttendance(DateTime? startDate, DateTime? endDate)
         {
-            List<string> reports = JsonParser.GetReportsFromJson(_webAPI.GETLogList(startTime, endTime));
+            List<string> reports;
+            if (UseStartTime && UseEndTime)
+            {
+                string startTime = UnixTime(startDate);
+                string endTime = UnixTime(endDate);
+
+                reports = JsonParser.GetReportsFromJson(_webAPI.GETLogList(startTime, endTime));
+            }
+            else if (UseStartTime)
+            {
+                string startTime = UnixTime(startDate);
+
+                reports = JsonParser.GetReportsFromJson(_webAPI.GETLogList(startTime, true));
+            }
+            else if (UseEndTime)
+            {
+                string endTime = UnixTime(endDate);
+
+                reports = JsonParser.GetReportsFromJson(_webAPI.GETLogList(endTime, false));
+            }
+            else
+            {
+                reports = JsonParser.GetReportsFromJson(_webAPI.GETLogList());
+            }
+
             foreach (string report in reports)
             {
                 List<string> characters = JsonParser.GetCharactersFromJson(_webAPI.GETReport(report));
                 foreach (string character in characters)
                 {
                     Character newCharacter = CheckCharacterExists(character);
-                    if (newCharacter == null)
-                    {
-                        newCharacter = new Character(character)
-                        {
-                            AttendanceCount = 1,
-                        };
-
-                        _characters.Add(newCharacter);
-                    }
-                    else
-                    {
-                        newCharacter.AttendanceCount++;
-                    }
+                    newCharacter.AttendanceCount++;
                 }
                 _maxAttendance++;
             }
@@ -106,12 +158,20 @@ namespace LeanderWclAttendanceChecker.Model
         {
             foreach (Player player in _players)
             {
+                player.AttendanceCount = 0;
                 foreach (Character character in player.Characters)
                 {
                     player.AttendanceCount += character.AttendanceCount;
                 }
-                player.AttendancePercent = player.AttendanceCount / _maxAttendance;
+                player.AttendancePercent = ((float )player.AttendanceCount / (float) _maxAttendance) * 100;
             }
+        }
+
+        private string UnixTime(DateTime? selectedDate)
+        {
+            double reference = new TimeSpan(new DateTime(1970, 1, 1).Ticks).TotalMilliseconds;
+            double selectedDateMils = new TimeSpan(selectedDate.Value.Ticks).TotalMilliseconds;
+            return (selectedDateMils - reference).ToString();
         }
 
         private Character CheckCharacterExists(string name)
@@ -123,7 +183,7 @@ namespace LeanderWclAttendanceChecker.Model
                     return character;
                 }
             }
-            return null;
+            return CreateNewCharacter(name);
         }
     }
 }

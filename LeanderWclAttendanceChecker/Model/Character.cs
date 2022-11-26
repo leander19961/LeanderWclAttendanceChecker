@@ -58,6 +58,11 @@ namespace LeanderWclAttendanceChecker.Model
             return this;
         }
 
+        public void RemoveYou()
+        {
+            _player.WithoutCharacters(this);
+        }
+
         override
         public string ToString()
         {

@@ -31,11 +31,18 @@ namespace LeanderWclAttendanceChecker.Model
             set { _attendancePercent = value; }
         }
 
+        public string AttendancePercent_String
+        {
+            get { return (_attendancePercent.ToString("0.00") + '%'); }
+        }
+
         public Player(string name)
         {
             _name = name;
             _attendanceCount = 0;
             _attendancePercent = 0.0f;
+
+            _characters = new List<Character>();
         }
 
         public List<Character> Characters
@@ -69,6 +76,14 @@ namespace LeanderWclAttendanceChecker.Model
             }
 
             return this;
+        }
+
+        public void RemoveYou()
+        {
+            foreach (Character character in _characters)
+            {
+                character.SetPlayer(null);
+            }
         }
 
         override
