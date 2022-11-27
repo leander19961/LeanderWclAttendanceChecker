@@ -80,9 +80,9 @@ namespace LeanderWclAttendanceChecker.Model
 
         public void RemoveYou()
         {
-            foreach (Character character in _characters)
+            for (int i = 0; i < _characters.Count; i++)
             {
-                character.SetPlayer(null);
+                Characters[i].Player = null;
             }
         }
 

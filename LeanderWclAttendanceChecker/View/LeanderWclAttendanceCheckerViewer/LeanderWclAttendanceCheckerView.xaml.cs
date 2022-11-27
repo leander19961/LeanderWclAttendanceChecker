@@ -90,6 +90,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
             }
 
             BindListViewPlayers();
+            RefreshListViews();
         }
 
         private void ButtonGetWclData_Click(object sender, RoutedEventArgs e)
@@ -137,6 +138,11 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
             }
 
             RefreshListViews();
+        }
+
+        private void ButtonDataExport_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelExport.WriteOutPutFile(_modelService.Players);
         }
 
 

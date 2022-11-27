@@ -40,19 +40,19 @@ namespace LeanderWclAttendanceChecker.API.Web
             JsonDocument json = JsonDocument.Parse(jsonText);
             JsonObject root = JsonObject.Create(json.RootElement);
 
-            JsonArray friendlies = null;
+            JsonArray exportedCharacters = null;
             foreach (KeyValuePair<string, JsonNode> key in root)
             {
-                if (key.Key.Equals("friendlies"))
+                if (key.Key.Equals("exportedCharacters"))
                 {
-                    friendlies = key.Value.AsArray();
+                    exportedCharacters = key.Value.AsArray();
                     break;
                 }
             }
 
-            foreach (JsonObject friedly in friendlies)
+            foreach (JsonObject exportedCharacter in exportedCharacters)
             {
-                foreach (KeyValuePair<string, JsonNode> key in friedly)
+                foreach (KeyValuePair<string, JsonNode> key in exportedCharacter)
                 {
                     string _tmp = null;
                     if (key.Key.Equals("name"))

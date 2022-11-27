@@ -117,6 +117,8 @@ namespace LeanderWclAttendanceChecker.Model
 
         public void GetCharacterAttendance(DateTime? startDate, DateTime? endDate)
         {
+            ResetCharacterAttendance();
+
             List<string> reports;
             if (UseStartTime && UseEndTime)
             {
@@ -152,6 +154,8 @@ namespace LeanderWclAttendanceChecker.Model
                 }
                 _maxAttendance++;
             }
+
+            _characters.OrderBy(entry => entry.AttendanceCount).ToList<Character>();
         }
 
         public void GetPlayerAttendance()
@@ -164,6 +168,14 @@ namespace LeanderWclAttendanceChecker.Model
                     player.AttendanceCount += character.AttendanceCount;
                 }
                 player.AttendancePercent = ((float )player.AttendanceCount / (float) _maxAttendance) * 100;
+            }
+        }
+
+        private void ResetCharacterAttendance()
+        {
+            foreach (Character character in _characters)
+            {
+                character.AttendanceCount = 0;
             }
         }
 

@@ -24,6 +24,11 @@ namespace LeanderWclAttendanceChecker.IO
                 Directory.CreateDirectory(PlayerstorePath);
             }
 
+            if (!Directory.Exists(OutputPath))
+            {
+                Directory.CreateDirectory(OutputPath);
+            }
+
             if (!File.Exists(PlayerstoreXml))
             {
                 XmlDocument emptyFilterList = new XmlDocument();

@@ -1,9 +1,9 @@
-﻿using LeanderWclAttendanceChecker.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LeanderWclAttendanceChecker.Properties;
 
 namespace LeanderWclAttendanceChecker.Resource
 {

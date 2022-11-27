@@ -39,11 +39,12 @@
             <Button x:Name="ButtonUndBindCharacter" Content="Unbind Character" HorizontalAlignment="Left" Margin="190,0,0,70" VerticalAlignment="Bottom" Width="115" Click="ButtonUndBindCharacter_Click" Height="20"/>
             <DatePicker x:Name="DatePickerStartTime" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="125" Margin="0,0,50,100" FirstDayOfWeek="Monday" Text="Test"/>
             <DatePicker x:Name="DatePickerEndTime" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="125" Margin="0,0,50,75" FirstDayOfWeek="Monday"/>
-            <Button x:Name="ButtonChangeBaseUrl" Content="Change BaseURL" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="115" Margin="130,0,0,90" Click="ButtonChangeBaseUrl_Click" Height="20" IsEnabled="False"/>
+            <Button x:Name="ButtonChangeBaseUrl" Content="Change BaseURL" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="115" Margin="190,0,0,90" Click="ButtonChangeBaseUrl_Click" Height="20" IsEnabled="False"/>
             <CheckBox x:Name="CheckBoxUseStartTime" Content="Use Start Time" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,190,102" Click="CheckBoxTime_Click"/>
             <CheckBox x:Name="CheckBoxUseEndTime" Content="Use End Time" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,194,77" Click="CheckBoxTime_Click"/>
             <Button x:Name="ButtonCreateNewPlayer" Content="Create New Player" HorizontalAlignment="Left" Margin="50,0,0,30" VerticalAlignment="Bottom" Width="140" Click="ButtonCreateNewPlayer_Click" Height="20"/>
             <Button x:Name="ButtonDeletePlayer" Content="Delete Player" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="115" Margin="190,0,0,30" Click="ButtonDeletePlayer_Click" Height="20"/>
+            <Button x:Name="ButtonDataExport" Content="Export Data" HorizontalAlignment="Left" Margin="50,0,0,90" VerticalAlignment="Bottom" Height="20" Width="140" Click="ButtonDataExport_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -23,7 +23,7 @@ namespace LeanderWclAttendanceChecker.IO
                 foreach (Character character in player.Characters)
                 {
                     XmlElement characterXml = playersXml.CreateElement(character.Name);
-                    playersXml.AppendChild(characterXml);
+                    playerXml.AppendChild(characterXml);
                 }
                 documentElement.AppendChild(playerXml);
             }
