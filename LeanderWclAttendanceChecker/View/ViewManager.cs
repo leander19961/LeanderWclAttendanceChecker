@@ -21,6 +21,7 @@ namespace LeanderWclAttendanceChecker.View
             };
 
             pickPlayerView.ShowDialog();
+            pickPlayerView.Activate();
 
             return pickPlayerView;
         }
@@ -33,6 +34,7 @@ namespace LeanderWclAttendanceChecker.View
             };
 
             changeBaseUrlView.ShowDialog();
+            changeBaseUrlView.Activate();
 
             return changeBaseUrlView;
         }
@@ -45,6 +47,7 @@ namespace LeanderWclAttendanceChecker.View
             };
 
             createNewPlayerView.ShowDialog();
+            createNewPlayerView.Activate();
 
             return createNewPlayerView;
         }

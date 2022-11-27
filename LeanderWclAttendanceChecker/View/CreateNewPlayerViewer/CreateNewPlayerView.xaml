@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CreateNewPlayerView" Height="200" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
-        <TextBox x:Name="TextBoxNewPlayerName" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="TextBoxNewPlayerName" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" KeyDown="TextBoxNewPlayerName_KeyDown"/>
         <Label Content="Enter Name For New Player" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100"/>
         <Button x:Name="ButtonCreateNewPlayer" Content="Create New Player" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Margin="0,75,0,0" Click="ButtonCreateNewPlayer_Click"/>
     </Grid>

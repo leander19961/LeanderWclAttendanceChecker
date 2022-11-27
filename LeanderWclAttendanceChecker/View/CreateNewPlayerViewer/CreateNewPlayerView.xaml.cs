@@ -1,4 +1,5 @@
-﻿using LeanderWclAttendanceChecker.Model;
+﻿using DocumentFormat.OpenXml.Drawing;
+using LeanderWclAttendanceChecker.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,14 @@ namespace LeanderWclAttendanceChecker.View.CreateNewPlayerViewer
             _name = TextBoxNewPlayerName.Text;
             _buttonClicked = true;
             this.Close();
+        }
+
+        private void TextBoxNewPlayerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                ButtonCreateNewPlayer_Click(sender, e);
+            }
         }
     }
 }

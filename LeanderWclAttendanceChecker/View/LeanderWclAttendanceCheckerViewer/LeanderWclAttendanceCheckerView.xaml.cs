@@ -79,6 +79,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
             }
 
             BindListViewPlayers();
+            this.Activate();
         }
 
         private void ButtonDeletePlayer_Click(object sender, RoutedEventArgs e)
@@ -91,6 +92,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
 
             BindListViewPlayers();
             RefreshListViews();
+            this.Activate();
         }
 
         private void ButtonGetWclData_Click(object sender, RoutedEventArgs e)
@@ -126,6 +128,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
             }
 
             RefreshListViews();
+            this.Activate();
         }
 
         private void ButtonUndBindCharacter_Click(object sender, RoutedEventArgs e)
@@ -154,6 +157,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
             {
                 _modelService.BaseUrl = changeBaseUrlView.NewBaseUrl;
             }
+            this.Activate();
         }
 
         private void CheckBoxTime_Click(object sender, RoutedEventArgs e)
