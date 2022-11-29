@@ -26,17 +26,17 @@ namespace LeanderWclAttendanceChecker.API.Web
         {
             if (identifier)
             {
-                return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?api_key={token}").Result;
+                return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?start={time}&api_key={token}").Result;
             }
             else
             {
-                return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?api_key={token}").Result;
+                return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?end={time}&api_key={token}").Result;
             }
         }
 
         public string GETLogList(string startTime, string endTime)
         {
-            return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?api_key={token}").Result;
+            return client.GetStringAsync($"https://www.warcraftlogs.com/v1/reports/guild/Added/Antonidas/EU?start={startTime}&end={endTime}&api_key={token}").Result;
         }
 
         public string GETReport(string reportCode)

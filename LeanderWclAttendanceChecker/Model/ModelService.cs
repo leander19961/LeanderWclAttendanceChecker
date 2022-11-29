@@ -177,6 +177,8 @@ namespace LeanderWclAttendanceChecker.Model
             {
                 character.AttendanceCount = 0;
             }
+
+            _maxAttendance = 0;
         }
 
         private string UnixTime(DateTime? selectedDate)

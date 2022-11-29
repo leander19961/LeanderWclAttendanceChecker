@@ -145,7 +145,7 @@ namespace LeanderWclAttendanceChecker.View.LeanderWclAttendanceCheckerViewer
 
         private void ButtonDataExport_Click(object sender, RoutedEventArgs e)
         {
-            ExcelExport.WriteOutPutFile(_modelService.Players);
+            TxtExport.WriteOutPutFile(_modelService.Players);
         }
 
 

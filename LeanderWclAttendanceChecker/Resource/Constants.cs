@@ -14,5 +14,6 @@ namespace LeanderWclAttendanceChecker.Resource
 
         public static readonly string PlayerstoreXml = PlayerstorePath + @"\Playerstore.xml";
         public static readonly string OutputXls = OutputPath + @"\Output.xlsx";
+        public static readonly string OutputTxt = OutputPath + @"\Output.txt";
     }
 }
